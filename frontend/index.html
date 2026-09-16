@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Machine Failure Prediction</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Machine Failure Prediction System</h1>
+        <p>Gradient Boosting • Leakage-Resistant Validation</p>
+    </header>
+
+
+    <main>
+
+        <!-- SENSOR INPUT SECTION -->
+
+        <section class="card">
+
+            <h2>Machine Sensor Data</h2>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label for="temperature">
+                        Temperature
+                    </label>
+
+                    <input
+                        type="number"
+                        id="temperature"
+                        step="0.001"
+                        placeholder="e.g. 75.0"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="pressure">
+                        Pressure
+                    </label>
+
+                    <input
+                        type="number"
+                        id="pressure"
+                        step="0.001"
+                        placeholder="e.g. 101.5"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="vibration">
+                        Vibration
+                    </label>
+
+                    <input
+                        type="number"
+                        id="vibration"
+                        step="0.001"
+                        placeholder="e.g. 2.0"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="rotational_speed">
+                        Rotational Speed
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rotational_speed"
+                        step="0.001"
+                        placeholder="e.g. 1470"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="operating_hours">
+                        Operating Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        id="operating_hours"
+                        step="0.001"
+                        placeholder="e.g. 300"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="ambient_temperature">
+                        Ambient Temperature
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ambient_temperature"
+                        step="0.001"
+                        placeholder="e.g. 27"
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="load_percent">
+                        Load Percent
+                    </label>
+
+                    <input
+                        type="number"
+                        id="load_percent"
+                        step="0.001"
+                        placeholder="e.g. 68"
+                    >
+                </div>
+
+            </div>
+
+
+            <button id="predictButton">
+                Predict Machine Failure
+            </button>
+
+        </section>
+
+
+        <!-- RESULT SECTION -->
+
+        <section class="card result-card">
+
+            <h2>Prediction Result</h2>
+
+            <div id="result">
+
+                <div class="result-placeholder">
+                    Enter machine sensor values and click
+                    <strong>Predict Machine Failure</strong>.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SYSTEM INFORMATION -->
+
+        <section class="card">
+
+            <h2>System Information</h2>
+
+            <div class="system-grid">
+
+                <div>
+                    <span>Model</span>
+                    <strong>Gradient Boosting</strong>
+                </div>
+
+                <div>
+                    <span>Validation</span>
+                    <strong>Leakage-Resistant</strong>
+                </div>
+
+                <div>
+                    <span>Backend</span>
+                    <strong>FastAPI</strong>
+                </div>
+
+                <div>
+                    <span>API Status</span>
+                    <strong id="apiStatus">
+                        Checking...
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            Gradient Boosting Leakage-Resistant Validation Project
+        </p>
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

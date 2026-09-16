@@ -1,0 +1,2 @@
+feature,feature_roc_auc,model_importance,leakage_status,safe_response
+maintenance_risk_score,1.0,0.9999999999999858,DETECTED,Reject feature and retrain without it.

@@ -1,0 +1,2 @@
+feature,feature_roc_auc,model_importance,status,safe_response
+machine_failure_rate,0.5721977690684353,0.005727194427462966,NOT_DETECTED,Reject feature and retrain without it.

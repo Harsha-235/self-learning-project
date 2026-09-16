@@ -1,0 +1,4 @@
+test,result,safe_response
+Safe target encoding,Training targets only,Allowed
+Leaky target encoding,Training + test targets,Reject feature
+Leakage decision,NOT_DETECTED,Use leakage-resistant model

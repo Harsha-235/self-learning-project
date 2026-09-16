@@ -1,0 +1,2 @@
+feature,safe_feature_auc,leaky_feature_auc,roc_auc_difference,status
+machine_failure_rate,0.5619033262988644,0.5728891568686564,0.00048035373329313735,NOT_DETECTED
