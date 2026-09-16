@@ -7,6 +7,11 @@ Representative operation - useful performance survives leakage removal.
 AC-2:
 Boundary/failure operation - leakage and invalid validation
 conditions are detected safely.
+
+AC-4:
+Frozen resource envelope - reference and final comparisons
+use the same approved environment, dataset, workload,
+model configuration, and resource constraints.
 """
 
 from pathlib import Path
@@ -37,6 +42,11 @@ ACCEPTANCE_RESULTS_FILE = (
 ACCEPTANCE_REPORT_FILE = (
     EXPERIMENTS_DIR
     / "acceptance_report.json"
+)
+
+RESOURCE_ENVELOPE_FILE = (
+    EXPERIMENTS_DIR
+    / "resource_envelope.json"
 )
 
 
@@ -522,14 +532,157 @@ def nt1_status(results):
 
 
 # ============================================================
+# AC-4
+# ============================================================
+
+def run_ac4():
+    """
+    AC-4:
+    Frozen resource envelope.
+
+    Verify that the reference and final comparison use the same
+    approved software environment, dataset, workload, model
+    configuration, and resource constraints.
+    """
+
+    if not RESOURCE_ENVELOPE_FILE.exists():
+        raise FileNotFoundError(
+            f"Required resource envelope file not found: "
+            f"{RESOURCE_ENVELOPE_FILE}"
+        )
+
+    with open(
+        RESOURCE_ENVELOPE_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
+        envelope = json.load(file)
+
+    # --------------------------------------------------------
+    # Validate required sections.
+    # --------------------------------------------------------
+
+    required_sections = {
+        "reference",
+        "final",
+        "resource_limits",
+    }
+
+    missing_sections = (
+        required_sections - set(envelope.keys())
+    )
+
+    if missing_sections:
+        raise ValueError(
+            "Missing required resource envelope sections: "
+            f"{sorted(missing_sections)}"
+        )
+
+    reference = envelope["reference"]
+    final = envelope["final"]
+    limits = envelope["resource_limits"]
+
+    # --------------------------------------------------------
+    # Check that the approved reference and final environments
+    # are identical.
+    # --------------------------------------------------------
+
+    environment_fields = [
+        "python_version",
+        "pandas_version",
+        "numpy_version",
+        "scikit_learn_version",
+        "joblib_version",
+        "dataset",
+        "dataset_rows",
+        "feature_count",
+        "target",
+        "workload",
+        "model",
+    ]
+
+    differences = {}
+
+    for field in environment_fields:
+        if reference.get(field) != final.get(field):
+            differences[field] = {
+                "reference": reference.get(field),
+                "final": final.get(field),
+            }
+
+    environment_frozen = (
+        len(differences) == 0
+    )
+
+    # --------------------------------------------------------
+    # Check resource constraints.
+    # --------------------------------------------------------
+
+    resources_unchanged = (
+        limits.get("hardware_change") is False
+        and
+        limits.get("workload_change") is False
+        and
+        limits.get("dataset_change") is False
+        and
+        limits.get("software_version_change") is False
+    )
+
+    passed = (
+        environment_frozen
+        and
+        resources_unchanged
+    )
+
+    return {
+        "acceptance_test": "AC-4",
+
+        "description": (
+            "Frozen resource envelope: reference and final "
+            "comparisons use the same approved environment, "
+            "dataset, workload, model configuration, and "
+            "resource constraints."
+        ),
+
+        "environment_frozen": environment_frozen,
+
+        "resources_unchanged": resources_unchanged,
+
+        "differences": differences,
+
+        "reference": reference,
+
+        "final": final,
+
+        "resource_limits": limits,
+
+        "status": "PASS" if passed else "FAIL",
+
+        "safe_response": (
+            "Accept frozen resource-envelope evidence."
+            if passed
+            else
+            "Reject the comparison and investigate changes "
+            "to the approved resource envelope."
+        ),
+    }
+
+
+# ============================================================
 # Main Acceptance Harness
 # ============================================================
 
 def main():
 
+    # --------------------------------------------------------
+    # Run all acceptance tests.
+    # --------------------------------------------------------
+
     ac1_result = run_ac1()
 
     ac2_result = run_ac2()
+
+    ac4_result = run_ac4()
 
     # --------------------------------------------------------
     # Compact CSV evidence.
@@ -555,6 +708,8 @@ def main():
                 "split_integrity_detected": "",
                 "representative_transfer_failure_detected": "",
                 "unsafe_optimization_detected": "",
+                "environment_frozen": "",
+                "resources_unchanged": "",
             },
 
             {
@@ -587,6 +742,26 @@ def main():
                         "unsafe_optimization_detected"
                     ]
                 ),
+                "environment_frozen": "",
+                "resources_unchanged": "",
+            },
+
+            {
+                "acceptance_test": "AC-4",
+                "status": ac4_result["status"],
+                "leakage_effect_confirmed": "",
+                "performance_survives_leakage_removal": "",
+                "all_failures_detected": "",
+                "leakage_detected": "",
+                "split_integrity_detected": "",
+                "representative_transfer_failure_detected": "",
+                "unsafe_optimization_detected": "",
+                "environment_frozen": (
+                    ac4_result["environment_frozen"]
+                ),
+                "resources_unchanged": (
+                    ac4_result["resources_unchanged"]
+                ),
             },
         ]
     )
@@ -603,6 +778,7 @@ def main():
     complete_report = {
         "AC-1": ac1_result,
         "AC-2": ac2_result,
+        "AC-4": ac4_result,
     }
 
     with open(
@@ -714,6 +890,31 @@ def main():
 
     print("\nSafe response:")
     print(ac2_result["safe_response"])
+
+    # --------------------------------------------------------
+    # AC-4 output
+    # --------------------------------------------------------
+
+    print("\n" + "-" * 70)
+
+    print("\nAC-4 -", ac4_result["status"])
+
+    print(
+        "Frozen resource envelope:",
+        ac4_result["environment_frozen"],
+    )
+
+    print(
+        "Resources unchanged:",
+        ac4_result["resources_unchanged"],
+    )
+
+    print("\nSafe response:")
+    print(ac4_result["safe_response"])
+
+    # --------------------------------------------------------
+    # Final output
+    # --------------------------------------------------------
 
     print("\n" + "=" * 70)
 

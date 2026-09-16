@@ -76,5 +76,47 @@
         "unsafe_optimization_detected": true,
         "status": "PASS",
         "safe_response": "Accept boundary/failure evidence. Mandatory negative conditions were detected and safe responses were recorded."
+    },
+    "AC-4": {
+        "acceptance_test": "AC-4",
+        "description": "Frozen resource envelope: reference and final comparisons use the same approved environment, dataset, workload, model configuration, and resource constraints.",
+        "environment_frozen": true,
+        "resources_unchanged": true,
+        "differences": {},
+        "reference": {
+            "python_version": "3.14.2",
+            "pandas_version": "3.0.5",
+            "numpy_version": "2.5.2",
+            "scikit_learn_version": "1.9.0",
+            "joblib_version": "1.5.3",
+            "dataset": "machine_data_v2.csv",
+            "dataset_rows": 5000,
+            "feature_count": 7,
+            "target": "failure",
+            "workload": "5000 machine records",
+            "model": "GradientBoostingClassifier"
+        },
+        "final": {
+            "python_version": "3.14.2",
+            "pandas_version": "3.0.5",
+            "numpy_version": "2.5.2",
+            "scikit_learn_version": "1.9.0",
+            "joblib_version": "1.5.3",
+            "dataset": "machine_data_v2.csv",
+            "dataset_rows": 5000,
+            "feature_count": 7,
+            "target": "failure",
+            "workload": "5000 machine records",
+            "model": "GradientBoostingClassifier"
+        },
+        "resource_limits": {
+            "execution_environment": "local Python virtual environment",
+            "hardware_change": false,
+            "workload_change": false,
+            "dataset_change": false,
+            "software_version_change": false
+        },
+        "status": "PASS",
+        "safe_response": "Accept frozen resource-envelope evidence."
     }
 }

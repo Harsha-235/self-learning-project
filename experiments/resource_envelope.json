@@ -1,0 +1,35 @@
+{
+    "reference": {
+        "python_version": "3.14.2",
+        "pandas_version": "3.0.5",
+        "numpy_version": "2.5.2",
+        "scikit_learn_version": "1.9.0",
+        "joblib_version": "1.5.3",
+        "dataset": "machine_data_v2.csv",
+        "dataset_rows": 5000,
+        "feature_count": 7,
+        "target": "failure",
+        "workload": "5000 machine records",
+        "model": "GradientBoostingClassifier"
+    },
+    "final": {
+        "python_version": "3.14.2",
+        "pandas_version": "3.0.5",
+        "numpy_version": "2.5.2",
+        "scikit_learn_version": "1.9.0",
+        "joblib_version": "1.5.3",
+        "dataset": "machine_data_v2.csv",
+        "dataset_rows": 5000,
+        "feature_count": 7,
+        "target": "failure",
+        "workload": "5000 machine records",
+        "model": "GradientBoostingClassifier"
+    },
+    "resource_limits": {
+        "execution_environment": "local Python virtual environment",
+        "hardware_change": false,
+        "workload_change": false,
+        "dataset_change": false,
+        "software_version_change": false
+    }
+}

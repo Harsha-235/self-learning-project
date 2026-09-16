@@ -1,0 +1,101 @@
+{
+    "project": "Gradient Boosting on Tabular Data with Leakage-Resistant Validation",
+    "kpi_count": 6,
+    "results": [
+        {
+            "kpi": "KPI-1",
+            "name": "Leakage Detection Effectiveness",
+            "measured_value": 100.0,
+            "unit": "score / 100",
+            "required_threshold": 80.0,
+            "leakage_roc_auc": 1.0,
+            "reference_comparison": "NOT_AVAILABLE",
+            "status": "PASS",
+            "evidence": "Controlled indirect leakage experiment",
+            "safe_response": "Reject suspicious leakage feature"
+        },
+        {
+            "kpi": "KPI-2",
+            "name": "Performance After Leakage Removal",
+            "measured_value": 100.0,
+            "unit": "performance retention / 100",
+            "required_threshold": 80.0,
+            "clean_baseline_f1": 0.7455,
+            "after_removal_f1": 0.7455,
+            "metric_differences": {
+                "accuracy": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "roc_auc": 0.0
+            },
+            "performance_survives_leakage_removal": true,
+            "reference_comparison": "NOT_AVAILABLE - numeric O2 KPI reference score/rubric is not recorded",
+            "status": "PASS_WITH_LIMITATION",
+            "evidence": "Controlled leakage-removal experiment",
+            "safe_response": "Accept representative performance evidence; record the missing O2 numeric reference separately."
+        },
+        {
+            "kpi": "KPI-3",
+            "name": "Split Integrity Test Pass Rate",
+            "measured_value": 100.0,
+            "unit": "percent",
+            "required_threshold": 80.0,
+            "temporal_violation_detected": true,
+            "group_violation_detected": true,
+            "invalid_split_detected": true,
+            "checks_passed": 4,
+            "checks_total": 4,
+            "reference_comparison": "NOT_AVAILABLE - numeric O2 split-integrity reference is not recorded",
+            "status": "PASS_WITH_LIMITATION",
+            "evidence": "Temporal validation, group validation and NT-3",
+            "safe_response": "Reject invalid validation split."
+        },
+        {
+            "kpi": "KPI-4",
+            "name": "Safe-Recovery Success Under Injected Faults",
+            "measured_value": 100.0,
+            "unit": "percent",
+            "required_threshold": 80.0,
+            "successful_tests": 5,
+            "total_tests": 5,
+            "reference_comparison": "NOT_AVAILABLE - numeric O2 recovery reference is not recorded",
+            "status": "PASS_WITH_LIMITATION",
+            "evidence": "Mandatory negative-test and recovery campaign",
+            "safe_response": "Use the documented safe/degraded response for each detected failure condition."
+        },
+        {
+            "kpi": "KPI-5",
+            "name": "Normalized Tracking/Regulation RMSE",
+            "measured_value": null,
+            "unit": "N/A",
+            "required_threshold": null,
+            "reference_comparison": "NOT_APPLICABLE",
+            "status": "NOT_APPLICABLE",
+            "evidence": "Binary machine-failure classification project",
+            "safe_response": "Do not fabricate an RMSE value for a non-regression classification task."
+        },
+        {
+            "kpi": "KPI-6",
+            "name": "Safety-Envelope Violation Count",
+            "measured_value": 0,
+            "unit": "violations",
+            "required_threshold": 0,
+            "reference_comparison": "DIRECT_THRESHOLD",
+            "mandatory_conditions": 5,
+            "violations": [],
+            "status": "PASS",
+            "evidence": "NT-1 through NT-5 mandatory adversarial software/data conditions",
+            "safe_response": "All mandatory adversarial conditions were detected and safe responses were recorded."
+        }
+    ],
+    "summary": {
+        "kpi_1": "PASS",
+        "kpi_2": "PASS_WITH_LIMITATION",
+        "kpi_3": "PASS_WITH_LIMITATION",
+        "kpi_4": "PASS_WITH_LIMITATION",
+        "kpi_5": "NOT_APPLICABLE",
+        "kpi_6": "PASS"
+    },
+    "note": "KPI-2 to KPI-4 include reference-comparison limitations because no numeric O2 KPI baseline or rubric score is currently recorded. KPI-5 is not applicable to the binary classification task. No unsupported RMSE or reference value is fabricated."
+}

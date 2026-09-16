@@ -1,0 +1,7 @@
+kpi,name,status,measured_value,unit,required_threshold,reference_comparison,evidence
+KPI-1,Leakage Detection Effectiveness,PASS,100.0,score / 100,80.0,NOT_AVAILABLE,Controlled indirect leakage experiment
+KPI-2,Performance After Leakage Removal,PASS_WITH_LIMITATION,100.0,performance retention / 100,80.0,NOT_AVAILABLE - numeric O2 KPI reference score/rubric is not recorded,Controlled leakage-removal experiment
+KPI-3,Split Integrity Test Pass Rate,PASS_WITH_LIMITATION,100.0,percent,80.0,NOT_AVAILABLE - numeric O2 split-integrity reference is not recorded,"Temporal validation, group validation and NT-3"
+KPI-4,Safe-Recovery Success Under Injected Faults,PASS_WITH_LIMITATION,100.0,percent,80.0,NOT_AVAILABLE - numeric O2 recovery reference is not recorded,Mandatory negative-test and recovery campaign
+KPI-5,Normalized Tracking/Regulation RMSE,NOT_APPLICABLE,,N/A,,NOT_APPLICABLE,Binary machine-failure classification project
+KPI-6,Safety-Envelope Violation Count,PASS,0.0,violations,0.0,DIRECT_THRESHOLD,NT-1 through NT-5 mandatory adversarial software/data conditions

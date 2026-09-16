@@ -1,3 +1,4 @@
-acceptance_test,status,leakage_effect_confirmed,performance_survives_leakage_removal,all_failures_detected,leakage_detected,split_integrity_detected,representative_transfer_failure_detected,unsafe_optimization_detected
-AC-1,PASS,True,True,,,,,
-AC-2,PASS,,,True,True,True,True,True
+acceptance_test,status,leakage_effect_confirmed,performance_survives_leakage_removal,all_failures_detected,leakage_detected,split_integrity_detected,representative_transfer_failure_detected,unsafe_optimization_detected,environment_frozen,resources_unchanged
+AC-1,PASS,True,True,,,,,,,
+AC-2,PASS,,,True,True,True,True,True,,
+AC-4,PASS,,,,,,,,True,True
