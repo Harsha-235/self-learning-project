@@ -1,0 +1,37 @@
+{
+    "acceptance_test": "AC-3",
+    "status": "PASS",
+    "independent_repeat": true,
+    "leakage_auc": 1.0,
+    "clean_metrics": {
+        "accuracy": 0.715,
+        "precision": 0.7177570093457943,
+        "recall": 0.7413127413127413,
+        "f1": 0.7293447293447294,
+        "roc_auc": 0.7771171438183886
+    },
+    "leaky_metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0
+    },
+    "recovered_metrics": {
+        "accuracy": 0.715,
+        "precision": 0.7177570093457943,
+        "recall": 0.7413127413127413,
+        "f1": 0.7293447293447294,
+        "roc_auc": 0.7771171438183886
+    },
+    "metric_differences": {
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.0
+    },
+    "leakage_detected": true,
+    "leakage_effect_confirmed": true,
+    "performance_survives_removal": true
+}

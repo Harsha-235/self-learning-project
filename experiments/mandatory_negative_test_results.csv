@@ -1,0 +1,6 @@
+test,description,validation_accuracy,deployment_accuracy,failure_detected,safe_response,status,model_accuracy_with_leakage,leakage_feature_auc,temporal_violation_detected,group_violation_detected,simulation_accuracy,representative_accuracy,baseline_nominal_error,optimized_nominal_error,baseline_worst_case_error,optimized_worst_case_error,nominal_improved,worst_case_worsened
+NT-1,Validation performance appears excellent but collapses under deployment-like conditions.,0.7025,0.002,True,Hold deployment and investigate validation boundary.,PASS,,,,,,,,,,,,
+NT-2,Hidden target-related information is introduced into a feature and must be exposed.,,,True,Reject the suspicious feature and retrain.,PASS,1.0,1.0,,,,,,,,,,
+NT-3,Training and validation splits violate temporal or group structure.,,,True,Reject the invalid validation split.,PASS,,,True,True,,,,,,,,
+NT-4,Simulation performance does not transfer to representative operating conditions.,,,True,Enter degraded/safe mode and require representative validation.,PASS,,,,,1.0,0.4816666666666667,,,,,,
+NT-5,Optimization improves nominal performance while increasing worst-case risk.,,,True,Reject the optimization and retain the safer configuration.,PASS,,,,,,,0.3,0.0,0.0,0.5,True,True

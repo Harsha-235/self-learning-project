@@ -1,0 +1,80 @@
+{
+    "AC-1": {
+        "acceptance_test": "AC-1",
+        "description": "Representative operation: useful performance survives leakage removal.",
+        "clean_baseline": {
+            "accuracy": 0.716,
+            "precision": 0.7160068846815835,
+            "recall": 0.7775700934579439,
+            "f1": 0.7455197132616488,
+            "roc_auc": 0.7796402371620943
+        },
+        "indirect_leakage": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "roc_auc": 1.0
+        },
+        "after_leakage_removal": {
+            "accuracy": 0.716,
+            "precision": 0.7160068846815835,
+            "recall": 0.7775700934579439,
+            "f1": 0.7455197132616488,
+            "roc_auc": 0.7796402371620943
+        },
+        "metric_differences": {
+            "accuracy": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "roc_auc": 0.0
+        },
+        "tolerance": 1e-06,
+        "leakage_effect_confirmed": true,
+        "performance_survives_leakage_removal": true,
+        "status": "PASS",
+        "safe_response": "Accept representative performance evidence."
+    },
+    "AC-2": {
+        "acceptance_test": "AC-2",
+        "description": "Boundary/failure operation: leakage and invalid validation conditions are detected and handled safely.",
+        "mandatory_negative_tests": {
+            "NT-1": {
+                "status": "PASS",
+                "failure_detected": true
+            },
+            "NT-2": {
+                "status": "PASS",
+                "failure_detected": true,
+                "leakage_feature_auc": 1.0
+            },
+            "NT-3": {
+                "status": "PASS",
+                "failure_detected": true,
+                "temporal_violation_detected": true,
+                "group_violation_detected": true
+            },
+            "NT-4": {
+                "status": "PASS",
+                "failure_detected": true,
+                "simulation_accuracy": 1.0,
+                "representative_accuracy": 0.4816666666666667
+            },
+            "NT-5": {
+                "status": "PASS",
+                "failure_detected": true,
+                "nominal_improved": true,
+                "worst_case_worsened": true
+            }
+        },
+        "all_tests_pass": true,
+        "all_failures_detected": true,
+        "leakage_detected": true,
+        "split_integrity_detected": true,
+        "representative_transfer_failure_detected": true,
+        "unsafe_optimization_detected": true,
+        "status": "PASS",
+        "safe_response": "Accept boundary/failure evidence. Mandatory negative conditions were detected and safe responses were recorded."
+    }
+}

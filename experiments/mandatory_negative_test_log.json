@@ -1,0 +1,51 @@
+[
+    {
+        "test": "NT-1",
+        "description": "Validation performance appears excellent but collapses under deployment-like conditions.",
+        "validation_accuracy": 0.7025,
+        "deployment_accuracy": 0.002,
+        "failure_detected": true,
+        "safe_response": "Hold deployment and investigate validation boundary.",
+        "status": "PASS"
+    },
+    {
+        "test": "NT-2",
+        "description": "Hidden target-related information is introduced into a feature and must be exposed.",
+        "model_accuracy_with_leakage": 1.0,
+        "leakage_feature_auc": 1.0,
+        "failure_detected": true,
+        "safe_response": "Reject the suspicious feature and retrain.",
+        "status": "PASS"
+    },
+    {
+        "test": "NT-3",
+        "description": "Training and validation splits violate temporal or group structure.",
+        "temporal_violation_detected": true,
+        "group_violation_detected": true,
+        "failure_detected": true,
+        "safe_response": "Reject the invalid validation split.",
+        "status": "PASS"
+    },
+    {
+        "test": "NT-4",
+        "description": "Simulation performance does not transfer to representative operating conditions.",
+        "simulation_accuracy": 1.0,
+        "representative_accuracy": 0.4816666666666667,
+        "failure_detected": true,
+        "safe_response": "Enter degraded/safe mode and require representative validation.",
+        "status": "PASS"
+    },
+    {
+        "test": "NT-5",
+        "description": "Optimization improves nominal performance while increasing worst-case risk.",
+        "baseline_nominal_error": 0.3,
+        "optimized_nominal_error": 0.0,
+        "baseline_worst_case_error": 0.0,
+        "optimized_worst_case_error": 0.5,
+        "nominal_improved": true,
+        "worst_case_worsened": true,
+        "failure_detected": true,
+        "safe_response": "Reject the optimization and retain the safer configuration.",
+        "status": "PASS"
+    }
+]
