@@ -1,0 +1,6 @@
+configuration,leakage_detected,rubric_score,proxy_auc,mutual_info,runtime_seconds
+MDI_Baseline_Only,False,15.0,0.5,0.0,0.0004
+Solo_AUC_Only,False,33.0,1.0,0.0,0.2603
+Mutual_Info_Only,False,33.0,0.5,0.6908,0.2836
+MI_plus_AUC,True,65.0,1.0,0.6908,0.5161
+Full_O3_Ensemble,True,100.0,1.0,0.6908,1.712

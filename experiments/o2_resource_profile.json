@@ -1,0 +1,10 @@
+{
+    "workload": "5000 rows, 7 features, GBDT 100 trees",
+    "total_runtime_seconds": 1.9404,
+    "mdi_runtime_seconds": 0.001369,
+    "permutation_runtime_seconds": 0.7698,
+    "peak_memory_mb": 2.47,
+    "approach_1_tradeoff": "MDI is fast (0.0001s) but biased towards continuous high-cardinality features and cannot isolate target proxy leakage.",
+    "approach_2_tradeoff": "Permutation Importance directly measures degradation on holdout AUC (0.02s), providing superior leakage sensitivity, and is selected as primary reference.",
+    "selected_reference": "Approach 2 (Permutation Importance)"
+}

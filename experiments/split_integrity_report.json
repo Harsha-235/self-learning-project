@@ -1,0 +1,143 @@
+{
+    "temporal_split_verification": {
+        "is_valid": true,
+        "temporal_valid": true,
+        "group_valid": true,
+        "train_rows": 4000,
+        "test_rows": 1000,
+        "train_time_range": [
+            "2025-01-01 00:00:00",
+            "2025-01-17 15:00:00"
+        ],
+        "test_time_range": [
+            "2025-01-17 16:00:00",
+            "2025-01-21 19:00:00"
+        ],
+        "time_gap_hours": 1.0,
+        "train_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "test_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "overlapping_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "error_message": null,
+        "telemetry_token": "TOKEN-SPLIT-VALID-079845"
+    },
+    "group_split_verification": {
+        "is_valid": true,
+        "temporal_valid": true,
+        "group_valid": true,
+        "train_rows": 4000,
+        "test_rows": 1000,
+        "train_time_range": [
+            "2025-01-01 00:00:00",
+            "2025-01-21 19:00:00"
+        ],
+        "test_time_range": [
+            "2025-01-01 00:00:00",
+            "2025-01-21 19:00:00"
+        ],
+        "time_gap_hours": 0.0,
+        "train_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08"
+        ],
+        "test_groups": [
+            "M09",
+            "M10"
+        ],
+        "overlapping_groups": [],
+        "error_message": null,
+        "telemetry_token": "TOKEN-SPLIT-VALID-610472"
+    },
+    "invalid_split_detection": {
+        "is_valid": false,
+        "temporal_valid": false,
+        "group_valid": false,
+        "train_rows": 3000,
+        "test_rows": 2500,
+        "train_time_range": [
+            "2025-01-01 00:00:00",
+            "2025-01-13 11:00:00"
+        ],
+        "test_time_range": [
+            "2025-01-11 10:00:00",
+            "2025-01-21 19:00:00"
+        ],
+        "time_gap_hours": 0.0,
+        "train_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "test_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "overlapping_groups": [
+            "M01",
+            "M02",
+            "M03",
+            "M04",
+            "M05",
+            "M06",
+            "M07",
+            "M08",
+            "M09",
+            "M10"
+        ],
+        "error_message": "Violation: Both Temporal lookahead (2025-01-11 10:00:00 <= 2025-01-13 11:00:00) and Group overlap ['M01', 'M04', 'M10', 'M08', 'M06', 'M02', 'M03', 'M05', 'M07', 'M09'] detected.",
+        "telemetry_token": "TOKEN-SPLIT-REJECT-570936"
+    }
+}

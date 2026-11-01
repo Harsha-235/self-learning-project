@@ -1,0 +1,11 @@
+{
+    "status": "APPROVED",
+    "candidate_rubric_score": 100.0,
+    "reference_rubric_score": 42.0,
+    "improvement_points": 58.0,
+    "meets_kpi_target": true,
+    "feature_diagnosed": "maintenance_risk_score",
+    "mutual_info": 0.6908,
+    "proxy_auc": 1.0,
+    "verdict": "QUARANTINE_LEAKAGE"
+}

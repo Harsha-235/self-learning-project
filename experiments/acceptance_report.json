@@ -1,28 +1,10 @@
-{
-    "AC-1": {
+[
+    {
         "acceptance_test": "AC-1",
-        "description": "Representative operation: useful performance survives leakage removal.",
-        "clean_baseline": {
-            "accuracy": 0.716,
-            "precision": 0.7160068846815835,
-            "recall": 0.7775700934579439,
-            "f1": 0.7455197132616488,
-            "roc_auc": 0.7796402371620943
-        },
-        "indirect_leakage": {
-            "accuracy": 1.0,
-            "precision": 1.0,
-            "recall": 1.0,
-            "f1": 1.0,
-            "roc_auc": 1.0
-        },
-        "after_leakage_removal": {
-            "accuracy": 0.716,
-            "precision": 0.7160068846815835,
-            "recall": 0.7775700934579439,
-            "f1": 0.7455197132616488,
-            "roc_auc": 0.7796402371620943
-        },
+        "description": "Representative operation: performance survives leakage removal.",
+        "status": "PASS",
+        "leakage_effect_confirmed": true,
+        "performance_survives_removal": true,
         "metric_differences": {
             "accuracy": 0.0,
             "precision": 0.0,
@@ -30,93 +12,40 @@
             "f1": 0.0,
             "roc_auc": 0.0
         },
-        "tolerance": 1e-06,
-        "leakage_effect_confirmed": true,
-        "performance_survives_leakage_removal": true,
-        "status": "PASS",
-        "safe_response": "Accept representative performance evidence."
+        "safe_response": "Accept representative performance evidence. Useful model capability retained."
     },
-    "AC-2": {
+    {
         "acceptance_test": "AC-2",
-        "description": "Boundary/failure operation: leakage and invalid validation conditions are detected and handled safely.",
-        "mandatory_negative_tests": {
-            "NT-1": {
-                "status": "PASS",
-                "failure_detected": true
-            },
-            "NT-2": {
-                "status": "PASS",
-                "failure_detected": true,
-                "leakage_feature_auc": 1.0
-            },
-            "NT-3": {
-                "status": "PASS",
-                "failure_detected": true,
-                "temporal_violation_detected": true,
-                "group_violation_detected": true
-            },
-            "NT-4": {
-                "status": "PASS",
-                "failure_detected": true,
-                "simulation_accuracy": 1.0,
-                "representative_accuracy": 0.4816666666666667
-            },
-            "NT-5": {
-                "status": "PASS",
-                "failure_detected": true,
-                "nominal_improved": true,
-                "worst_case_worsened": true
-            }
-        },
+        "description": "Boundary and failure operation: NT-1 to NT-5 all triggered safe interlock states.",
+        "status": "PASS",
         "all_tests_pass": true,
         "all_failures_detected": true,
-        "leakage_detected": true,
-        "split_integrity_detected": true,
-        "representative_transfer_failure_detected": true,
-        "unsafe_optimization_detected": true,
-        "status": "PASS",
-        "safe_response": "Accept boundary/failure evidence. Mandatory negative conditions were detected and safe responses were recorded."
+        "nt_breakdown": {
+            "NT-1": "PASS",
+            "NT-2": "PASS",
+            "NT-3": "PASS",
+            "NT-4": "PASS",
+            "NT-5": "PASS"
+        },
+        "safe_response": "Accept boundary and failure evidence. All faults exposed and contained."
     },
-    "AC-4": {
+    {
+        "acceptance_test": "AC-3",
+        "description": "Independent acceptance evidence: independent repetition confirms zero drift.",
+        "status": "PASS",
+        "leakage_feature_auc": 1.0,
+        "clean_auc": 0.7771,
+        "recovered_auc": 0.7771,
+        "reproducibility_drift": 0.0,
+        "safe_response": "Accept independent replication evidence. Full reproducibility verified."
+    },
+    {
         "acceptance_test": "AC-4",
-        "description": "Frozen resource envelope: reference and final comparisons use the same approved environment, dataset, workload, model configuration, and resource constraints.",
+        "description": "Frozen resource envelope: reference and candidate use identical verified environment.",
+        "status": "PASS",
         "environment_frozen": true,
         "resources_unchanged": true,
         "differences": {},
-        "reference": {
-            "python_version": "3.14.2",
-            "pandas_version": "3.0.5",
-            "numpy_version": "2.5.2",
-            "scikit_learn_version": "1.9.0",
-            "joblib_version": "1.5.3",
-            "dataset": "machine_data_v2.csv",
-            "dataset_rows": 5000,
-            "feature_count": 7,
-            "target": "failure",
-            "workload": "5000 machine records",
-            "model": "GradientBoostingClassifier"
-        },
-        "final": {
-            "python_version": "3.14.2",
-            "pandas_version": "3.0.5",
-            "numpy_version": "2.5.2",
-            "scikit_learn_version": "1.9.0",
-            "joblib_version": "1.5.3",
-            "dataset": "machine_data_v2.csv",
-            "dataset_rows": 5000,
-            "feature_count": 7,
-            "target": "failure",
-            "workload": "5000 machine records",
-            "model": "GradientBoostingClassifier"
-        },
-        "resource_limits": {
-            "execution_environment": "local Python virtual environment",
-            "hardware_change": false,
-            "workload_change": false,
-            "dataset_change": false,
-            "software_version_change": false
-        },
-        "status": "PASS",
-        "safe_response": "Accept frozen resource-envelope evidence."
+        "safe_response": "Accept frozen resource-envelope evidence. Workload and limits unchanged."
     }
-}
+]

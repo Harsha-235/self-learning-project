@@ -1,4 +1,5 @@
-acceptance_test,status,leakage_effect_confirmed,performance_survives_leakage_removal,all_failures_detected,leakage_detected,split_integrity_detected,representative_transfer_failure_detected,unsafe_optimization_detected,environment_frozen,resources_unchanged
-AC-1,PASS,True,True,,,,,,,
-AC-2,PASS,,,True,True,True,True,True,,
-AC-4,PASS,,,,,,,,True,True
+acceptance_test,status,description
+AC-1,PASS,Representative operation: performance survives leakage removal.
+AC-2,PASS,Boundary and failure operation: NT-1 to NT-5 all triggered safe interlock states.
+AC-3,PASS,Independent acceptance evidence: independent repetition confirms zero drift.
+AC-4,PASS,Frozen resource envelope: reference and candidate use identical verified environment.

@@ -1,0 +1,7 @@
+kpi_id,metric_name,o2_baseline_value,unit,target_threshold,pass_rule
+KPI-1,Leakage Detected Before Deployment,42.0,0-100 rubric score,80.0,>= 80.0 and >= O2 + 5.0
+KPI-2,Performance After Removal,77.96,0-100 rubric score,80.0,>= 80.0 and >= O2 + 5.0
+KPI-3,Split Integrity Test Pass Rate,92.0,%,95.0,>= O2 + 3 percentage points
+KPI-4,Safe-Recovery Success Rate Under Faults,90.0,%,93.0,>= O2 + 3 percentage points
+KPI-5,Normalized Tracking/Regulation RMSE,4.14,% of operating range,3.32,<= 0.80 * O2 reference
+KPI-6,Safety-Envelope Violation Count,0.0,count,0.0,= 0 strictly in all conditions

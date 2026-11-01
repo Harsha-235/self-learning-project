@@ -4,205 +4,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Machine Failure Prediction</title>
-
+    <title>MachineGuard | Failure Prediction</title>
+    <meta name="description" content="Simple machine failure prediction with leakage-resistant validation.">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-
-<div class="container">
-
-    <header>
-        <h1>Machine Failure Prediction System</h1>
-        <p>Gradient Boosting • Leakage-Resistant Validation</p>
+    <header class="topbar">
+        <a class="brand" href="#home">
+            <span class="brand-icon">M</span>
+            <span>MachineGuard<small>Machine Failure Prediction</small></span>
+        </a>
+        <div class="connection">
+            <span id="apiDot" class="dot"></span>
+            <span id="apiStatus">Checking connection...</span>
+        </div>
     </header>
 
-
-    <main>
-
-        <!-- SENSOR INPUT SECTION -->
-
-        <section class="card">
-
-            <h2>Machine Sensor Data</h2>
-
-            <div class="form-grid">
-
-                <div class="input-group">
-                    <label for="temperature">
-                        Temperature
-                    </label>
-
-                    <input
-                        type="number"
-                        id="temperature"
-                        step="0.001"
-                        placeholder="e.g. 75.0"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="pressure">
-                        Pressure
-                    </label>
-
-                    <input
-                        type="number"
-                        id="pressure"
-                        step="0.001"
-                        placeholder="e.g. 101.5"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="vibration">
-                        Vibration
-                    </label>
-
-                    <input
-                        type="number"
-                        id="vibration"
-                        step="0.001"
-                        placeholder="e.g. 2.0"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="rotational_speed">
-                        Rotational Speed
-                    </label>
-
-                    <input
-                        type="number"
-                        id="rotational_speed"
-                        step="0.001"
-                        placeholder="e.g. 1470"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="operating_hours">
-                        Operating Hours
-                    </label>
-
-                    <input
-                        type="number"
-                        id="operating_hours"
-                        step="0.001"
-                        placeholder="e.g. 300"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="ambient_temperature">
-                        Ambient Temperature
-                    </label>
-
-                    <input
-                        type="number"
-                        id="ambient_temperature"
-                        step="0.001"
-                        placeholder="e.g. 27"
-                    >
-                </div>
-
-
-                <div class="input-group">
-                    <label for="load_percent">
-                        Load Percent
-                    </label>
-
-                    <input
-                        type="number"
-                        id="load_percent"
-                        step="0.001"
-                        placeholder="e.g. 68"
-                    >
-                </div>
-
+    <main class="container" id="home">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">MACHINE HEALTH MONITORING</p>
+                <h1>Understand your machine's health.</h1>
+                <p class="hero-copy">
+                    Enter machine sensor readings to predict possible failure.
+                    Explore how the model is checked for data leakage and unreliable validation.
+                </p>
             </div>
-
-
-            <button id="predictButton">
-                Predict Machine Failure
-            </button>
-
+            <div class="hero-mark" aria-hidden="true">✓</div>
         </section>
 
+        <nav class="main-nav" aria-label="Main sections">
+            <a class="nav-link active" href="#predict">1. Predict</a>
+            <a class="nav-link" href="#understand">2. Understand</a>
+            <a class="nav-link" href="#tests">3. Validation & Safety</a>
+        </nav>
 
-        <!-- RESULT SECTION -->
-
-        <section class="card result-card">
-
-            <h2>Prediction Result</h2>
-
-            <div id="result">
-
-                <div class="result-placeholder">
-                    Enter machine sensor values and click
-                    <strong>Predict Machine Failure</strong>.
+        <!-- SECTION 1: PREDICTION -->
+        <section id="predict" class="section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">SECTION 1</p>
+                    <h2>Predict machine failure</h2>
+                    <p>Enter seven sensor values or load an example.</p>
                 </div>
-
+                <span class="pill" id="modelStatus">Checking model...</span>
             </div>
 
-        </section>
-
-
-        <!-- SYSTEM INFORMATION -->
-
-        <section class="card">
-
-            <h2>System Information</h2>
-
-            <div class="system-grid">
-
-                <div>
-                    <span>Model</span>
-                    <strong>Gradient Boosting</strong>
-                </div>
-
-                <div>
-                    <span>Validation</span>
-                    <strong>Leakage-Resistant</strong>
-                </div>
-
-                <div>
-                    <span>Backend</span>
-                    <strong>FastAPI</strong>
-                </div>
-
-                <div>
-                    <span>API Status</span>
-                    <strong id="apiStatus">
-                        Checking...
-                    </strong>
-                </div>
-
+            <div class="example-bar">
+                <span class="example-label">Try an example:</span>
+                <button type="button" class="btn btn-outline" id="presetNormal">Normal example</button>
+                <button type="button" class="btn btn-outline" id="presetRisk">Higher-risk example</button>
+                <button type="button" class="btn btn-text" id="resetInputs">Reset values</button>
             </div>
 
+            <div class="layout-grid">
+                <div class="card">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Machine sensor readings</h3>
+                            <p>All seven values are required.</p>
+                        </div>
+                        <span class="step-number">01</span>
+                    </div>
+
+                    <form id="predictionForm">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="tempInput">Temperature</label>
+                                <div class="input-unit">
+                                    <input type="number" id="tempInput" step="any" value="50" required>
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="pressureInput">Pressure</label>
+                                <div class="input-unit">
+                                    <input type="number" id="pressureInput" step="any" value="100" required>
+                                    <span>kPa</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="vibrationInput">Vibration</label>
+                                <div class="input-unit">
+                                    <input type="number" id="vibrationInput" step="any" value="0.5" required>
+                                    <span>mm/s</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="speedInput">Rotational speed</label>
+                                <div class="input-unit">
+                                    <input type="number" id="speedInput" step="any" value="1500" required>
+                                    <span>RPM</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="hoursInput">Operating hours</label>
+                                <div class="input-unit">
+                                    <input type="number" id="hoursInput" step="any" value="50" required>
+                                    <span>hrs</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="ambientInput">Ambient temperature</label>
+                                <div class="input-unit">
+                                    <input type="number" id="ambientInput" step="any" value="25" required>
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="loadInput">Machine load</label>
+                                <div class="input-unit">
+                                    <input type="number" id="loadInput" step="any" value="40" required>
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="helper-text">
+                            The backend checks the permitted safety limits before making a prediction.
+                        </p>
+
+                        <button class="btn btn-primary btn-wide" id="btnPredict" type="submit">
+                            Predict machine condition
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card result-card" aria-live="polite">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Prediction result</h3>
+                            <p>The model's response appears here.</p>
+                        </div>
+                        <span class="step-number">02</span>
+                    </div>
+
+                    <div id="emptyResult" class="empty-state">
+                        <div class="empty-icon">↗</div>
+                        <h3>Ready to check</h3>
+                        <p>Enter the sensor readings and select Predict machine condition.</p>
+                    </div>
+
+                    <div id="detailedResult" class="hidden">
+                        <div id="resultBanner" class="result-banner">
+                            <span id="resultIcon" class="result-icon">✓</span>
+                            <div>
+                                <p class="result-label">MODEL PREDICTION</p>
+                                <h2 id="metricClass">Normal</h2>
+                                <p id="resultExplanation">Prediction details appear here.</p>
+                            </div>
+                        </div>
+
+                        <div class="probability-block">
+                            <div class="probability-head">
+                                <span>Estimated failure probability</span>
+                                <strong id="gaugeProbText">0%</strong>
+                            </div>
+                            <div class="progress-track">
+                                <div id="gaugeBarFill" class="progress-fill"></div>
+                            </div>
+                            <p class="helper-text">
+                                This is the model's estimated probability, not a guarantee that failure will or will not
+                                occur.
+                            </p>
+                        </div>
+
+                        <div class="result-details-grid">
+                            <div class="detail-item">
+                                <span>Safety check</span>
+                                <strong id="metricEnvelope">Not checked</strong>
+                            </div>
+                            <div class="detail-item">
+                                <span>System state</span>
+                                <strong id="metricInterlock">Unknown</strong>
+                            </div>
+                            <div class="detail-item full-width">
+                                <span>Prediction mode</span>
+                                <strong id="metricMode">Standard</strong>
+                            </div>
+                        </div>
+
+                        <div id="degradedNotice" class="notice hidden">
+                            The safety interlock is active. The system may be returning a conservative fallback instead
+                            of a normal model prediction.
+                        </div>
+                    </div>
+
+                    <div id="errorMessage" class="notice notice-error hidden" role="alert"></div>
+                </div>
+            </div>
         </section>
 
+        <!-- SECTION 2: PROJECT EXPLANATION -->
+        <section id="understand" class="section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">SECTION 2</p>
+                    <h2>Understand the project</h2>
+                    <p>What the system does and why it matters.</p>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <span class="info-icon">01</span>
+                    <h3>Collect sensor data</h3>
+                    <p>The system uses temperature, pressure, vibration, speed, operating hours, ambient temperature,
+                        and load.</p>
+                </article>
+                <article class="info-card">
+                    <span class="info-icon">02</span>
+                    <h3>Predict failure risk</h3>
+                    <p>A Gradient Boosting machine-learning model estimates whether the machine is in a normal or
+                        failure-risk class.</p>
+                </article>
+                <article class="info-card">
+                    <span class="info-icon">03</span>
+                    <h3>Check for data leakage</h3>
+                    <p>Data leakage happens when a model gets information it should not have. It can make test results
+                        look unrealistically good.</p>
+                </article>
+                <article class="info-card">
+                    <span class="info-icon">04</span>
+                    <h3>Validate fairly</h3>
+                    <p>Random, time-based, and machine-based validation check the model in different ways.</p>
+                </article>
+            </div>
+
+            <div class="plain-explanation">
+                <h3>Why is leakage-resistant validation important?</h3>
+                <p>
+                    A model may appear accurate if training and testing data accidentally share information.
+                    This project checks for suspicious features and tests whether the model's performance remains
+                    after leakage is removed. The aim is to produce more trustworthy evaluation results.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: VALIDATION AND SAFETY -->
+        <section id="tests" class="section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">SECTION 3</p>
+                    <h2>Validation & safety tools</h2>
+                    <p>Run the available checks and read their results.</p>
+                </div>
+            </div>
+
+            <div class="tool-grid">
+                <article class="card tool-card">
+                    <div class="tool-icon">A</div>
+                    <h3>Leakage scan</h3>
+                    <p>Checks sensor features for suspicious relationships with the failure target.</p>
+                    <button type="button" id="btnRunO3Scan" class="btn btn-primary">Run leakage scan</button>
+                    
+                    <div id="leakageSummary" class="tool-result" aria-live="polite">No scan has been run yet.</div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Score</th>
+                                    <th>Finding</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leakageTableBody">
+                                <tr>
+                                    <td colspan="3">Run the scan to see results.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="card tool-card">
+                    <div class="tool-icon">B</div>
+                    <h3>Validation split check</h3>
+                    <p>Checks chronological separation and whether training and testing use separate machines for group
+                        validation.</p>
+                    <button type="button" id="btnVerifySplits" class="btn btn-primary">Verify validation splits</button>
+
+                    <div class="split-result">
+                        <div>
+                            <strong>Time-based split</strong>
+                            <span id="badgeTemporalSplit" class="pill">Not checked</span>
+                            <p id="tokenTemporal" class="small-result">Waiting for verification.</p>
+                        </div>
+                        <div>
+                            <strong>Machine-based split</strong>
+                            <span id="badgeGroupSplit" class="pill">Not checked</span>
+                            <p id="tokenGroup" class="small-result">Waiting for verification.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card tool-card">
+                    <div class="tool-icon">C</div>
+                    <h3>Safety interlock</h3>
+                    <p>The interlock can hold predictions when a defined fault condition is injected. Use recovery after
+                        a test.</p>
+
+                    <label class="field-label" for="faultSelect">Choose a test condition</label>
+                    <select id="faultSelect">
+                        <option value="NT-1">NT-1 — Validation performance failure</option>
+                        <option value="NT-2">NT-2 — Hidden data leakage</option>
+                        <option value="NT-3">NT-3 — Invalid data split</option>
+                        <option value="NT-4">NT-4 — Transfer failure</option>
+                        <option value="NT-5">NT-5 — Unsafe optimization</option>
+                        <option value="MANUAL">Manual inspection hold</option>
+                    </select>
+
+                    <div class="button-row">
+                        <button type="button" id="btnTripInterlock" class="btn btn-danger">Test safety hold</button>
+                        <button type="button" id="btnRecoverInterlock" class="btn btn-primary">Attempt recovery</button>
+                    </div>
+                    <div id="interlockMessage" class="tool-result" aria-live="polite">No safety action requested.</div>
+                </article>
+
+                <article class="card tool-card">
+                    <div class="tool-icon">D</div>
+                    <h3>System status</h3>
+                    <p>Check whether the backend and model are available and view recent safety events.</p>
+                    <button type="button" id="btnRefreshStatus" class="btn btn-outline">Refresh system status</button>
+                    <div class="status-list">
+                        <div><span>Backend</span><strong id="statusBackend">Checking...</strong></div>
+                        <div><span>Model loaded</span><strong id="statusModel">Checking...</strong></div>
+                        <div><span>Interlock state</span><strong id="statusInterlock">Checking...</strong></div>
+                        <div><span>Recorded events</span><strong id="statusEvents">—</strong></div>
+                    </div>
+                    <h4>Recent safety events</h4>
+                    <div id="telemetryLogFeed" class="event-feed">No events loaded yet.</div>
+                </article>
+            </div>
+
+            <div class="notice">
+                <strong>Important:</strong> the buttons above call the running backend. They do not automatically
+                execute every saved test file or prove that all project KPIs have passed. Run the Python test suite
+                separately for full test evidence.
+            </div>
+        </section>
+
+        <footer class="footer">
+            <strong>MachineGuard</strong>
+            <span>Gradient Boosting with Leakage-Resistant Validation</span>
+            <span id="footerState">Waiting for backend connection</span>
+        </footer>
     </main>
-
-
-    <footer>
-        <p>
-            Gradient Boosting Leakage-Resistant Validation Project
-        </p>
-    </footer>
-
-</div>
-
-
-<script src="script.js"></script>
-
 </body>
 
 </html>

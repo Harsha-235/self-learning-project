@@ -1,0 +1,3 @@
+subsystem,leakage_detection_rubric,false_positive_quarantine,runtime_seconds,verdict
+O2 Reference (MDI Feature Importance),42.0,False,0.4091,Indeterminate (Cannot distinguish legitimate high impact from leakage)
+O3 Candidate (Multi-Signal Indirect Detector),100.0,False,0.7707,Defensible Positive Detection (QUARANTINE_LEAKAGE)
