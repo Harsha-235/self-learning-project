@@ -69,14 +69,23 @@ def run_tests():
 
 
 def start_server(port=8000):
-    print("=" * 70)
-    print(" STARTING OPERABLE SYSTEM SERVICE & WORKSTATION")
-    print("=" * 70)
-    print(f"Backend API URL : http://127.0.0.1:{port}")
-    print(f"Interactive UI  : http://127.0.0.1:{port}/ui/ (or file:///{PROJECT_ROOT.as_posix()}/frontend/index.html)")
-    print("=" * 70)
+    import os
     import uvicorn
-    uvicorn.run("backend.app:app", host="127.0.0.1", port=port, reload=False)
+
+    port = int(os.environ.get("PORT", port))
+
+    print("=" * 70)
+    print(" STARTING GRADIENT BOOSTING WEB SERVICE")
+    print("=" * 70)
+    print(f"Server running on port: {port}")
+    print("=" * 70)
+
+    uvicorn.run(
+        "backend.app:app",
+        host="0.0.0.0",
+        port=port,
+        reload=False
+    )
 
 
 def main():
